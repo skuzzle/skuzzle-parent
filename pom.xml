@@ -4,7 +4,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <groupId>de.skuzzle</groupId>
     <artifactId>skuzzle-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
@@ -16,9 +16,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        
+
         <site.name>skuzzle-parent</site.name>
-        
+
         <!-- Versions -->
         <javadoc.version>2.10.1</javadoc.version>
 
@@ -76,12 +76,30 @@
             <id>sonatype-nexus-snapshots</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
         <site>
             <id>skuzzle-ftp</id>
             <name>${site.name}</name>
             <url>${ftp.url}/${ftp.basePath}/</url>
         </site>
     </distributionManagement>
+
+    <repositories>
+        <!-- Enable OSS Sonatype SNAPSHOTS -->
+        <repository>
+            <id>snapshots-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <!-- Define some default dependencies used by most skuzzle projects -->
     <dependencyManagement>
@@ -122,12 +140,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>2.7</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
                 </plugin>
 
                 <!-- Configure test coverage -->
@@ -211,7 +223,7 @@
                         </execution>
                     </executions>
                 </plugin>
-                
+
                 <!-- Dependency Analysis: force explicit dependency declaration -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -252,7 +264,7 @@
                         </execution>
                     </executions>
                 </plugin>
-                
+
                 <!-- Deploy to Sonatype -->
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
@@ -286,7 +298,7 @@
             </plugin>
         </plugins>
     </build>
-    
+
     <reporting>
         <plugins>
             <!-- Generate JavaDoc Reports -->
