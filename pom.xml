@@ -7,10 +7,11 @@
 
     <groupId>de.skuzzle</groupId>
     <artifactId>skuzzle-parent</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
     <url>http://www.skuzzle.de/maven/</url>
 
+    <name>skuzzle-parent</name>
     <description>Parent POM for all skuzzle GitHub Projects</description>
     <inceptionYear>2014</inceptionYear>
 
@@ -38,6 +39,14 @@
         <sonar.language>java</sonar.language>
         <sonar.skipPackageDesign>true</sonar.skipPackageDesign>
     </properties>
+
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>http://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <!-- GitHub Issues, CI and SCM -->
     <issueManagement>
@@ -283,7 +292,7 @@
                     <configuration>
                         <serverId>sonatype-nexus-snapshots</serverId>
                         <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        <autoReleaseAfterClose>false</autoReleaseAfterClose>
                     </configuration>
                 </plugin>
                 <!-- Perform Release -->
@@ -379,6 +388,18 @@
                         </plugin>
                     </plugins>
                 </pluginManagement>
+                
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <inherited>false</inherited>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
             </build>
         </profile>
     </profiles>
