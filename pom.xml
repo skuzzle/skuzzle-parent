@@ -121,6 +121,14 @@
     </dependencyManagement>
 
     <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ftp</artifactId>
+                <version>1.0-beta-6</version>
+            </extension>
+        </extensions>
+
         <pluginManagement>
             <plugins>
                 <!-- Compile sources -->
