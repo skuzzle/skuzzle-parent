@@ -17,10 +17,14 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+        
         <github.name>skuzzle-parent</github.name>
         <site.name>skuzzle-parent</site.name>
 
+        <!-- Java Version -->
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        
         <!-- Versions -->
         <javadoc.version>2.10.1</javadoc.version>
 
@@ -34,10 +38,13 @@
         <ftp.basePath>html/maven</ftp.basePath>
 
         <!-- Sonar Qube -->
-        <sonar.jacoco.itReportPath>${project.basedir}/../target/jacoco-it.exec</sonar.jacoco.itReportPath>
-        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.language>java</sonar.language>
         <sonar.skipPackageDesign>true</sonar.skipPackageDesign>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+
+        <sonar.jacoco.reportPath>${project.build.directory}/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.jacoco.itReportPath>${project.build.directory}/jacoco-it.exec</sonar.jacoco.itReportPath>
     </properties>
 
     <licenses>
@@ -132,6 +139,7 @@
 
     <build>
         <extensions>
+            <!-- Enable FTP deployment for reports -->
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ftp</artifactId>
@@ -164,19 +172,21 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.7.1.201405082137</version>
+                    <version>0.7.2.201409121644</version>
+                    <configuration>
+                        <append>true</append>
+                    </configuration>
                     <executions>
                         <execution>
-                            <id>default-prepare-agent</id>
+                            <id>prepare-code-coverage-unit-tests</id>
                             <goals>
                                 <goal>prepare-agent</goal>
                             </goals>
                         </execution>
                         <execution>
-                            <id>default-report</id>
-                            <phase>prepare-package</phase>
+                            <id>prepare-code-coverage-integration-tests</id>
                             <goals>
-                                <goal>report</goal>
+                                <goal>prepare-agent-integration</goal>
                             </goals>
                         </execution>
                     </executions>
@@ -342,6 +352,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
             </plugin>
+            <!-- Coverage activated for all modules -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -373,6 +384,7 @@
                         <id>report-coverage</id>
                         <reports>
                             <report>report</report>
+                            <report>report-integration</report>
                         </reports>
                         <configuration>
                             <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
@@ -386,6 +398,11 @@
     <profiles>
         <profile>
             <id>release</id>
+            <activation>
+                <property>
+                    <name>skuzzle.release</name>
+                </property>
+            </activation>
             <build>
                 <plugins>
                     <!-- Enable signing and sonatype deploy -->
@@ -400,5 +417,6 @@
                 </plugins>
             </build>
         </profile>
+
     </profiles>
 </project>
