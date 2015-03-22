@@ -31,6 +31,7 @@
         <!-- Versions -->
         <javadoc.version>2.10.1</javadoc.version>
         <jacoco.version>0.7.2.201409121644</jacoco.version>
+        <sonar.maven.version>2.5</sonar.maven.version>
 
         <!-- Dependency Analyzer -->
         <!-- Fail if dependencies have not been declared explicitly -->
@@ -163,6 +164,12 @@
                     </configuration>
                 </plugin>
 
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${sonar.maven.version}</version>
+                </plugin>
+                
                 <!-- Generate project's site -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -346,6 +353,7 @@
                         <useReleaseProfile>false</useReleaseProfile>
                         <releaseProfiles>release</releaseProfiles>
                         <goals>deploy</goals>
+                        <tagNameFormat>v.@{project.version}</tagNameFormat>
                     </configuration>
                 </plugin>
                 <!-- package release files -->
