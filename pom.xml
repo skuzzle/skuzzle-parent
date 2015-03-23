@@ -20,7 +20,11 @@
 
         <github.name>skuzzle-parent</github.name>
         <site.name>skuzzle-parent</site.name>
-
+        
+        <!-- Name of the SCM profile in the settings.xml -->
+        <!-- TODO: remove when upgrading parent pom -->
+        <project.scm.id>github</project.scm.id>
+        
         <!-- Tests -->
         <skipIT>false</skipIT>
 
