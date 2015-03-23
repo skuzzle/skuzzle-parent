@@ -72,7 +72,7 @@
 
     <scm>
         <connection>scm:git:git://github.com/skuzzle/${github.name}.git</connection>
-        <developerConnection>scm:git:git@github.com:skuzzle/${github.name}.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/skuzzle/${github.name}.git</developerConnection>
         <url>https://github.com/skuzzle/${github.name}</url>
         <tag>HEAD</tag>
     </scm>
