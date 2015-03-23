@@ -352,8 +352,8 @@
                         <autoVersionSubmodules>true</autoVersionSubmodules>
                         <useReleaseProfile>false</useReleaseProfile>
                         <releaseProfiles>release</releaseProfiles>
-                        <goals>deploy</goals>
-                        <tagNameFormat>v.@{project.version}</tagNameFormat>
+                        <prepareGoals>deploy</prepareGoals>
+                        <tagNameFormat>v@{project.version}</tagNameFormat>
                     </configuration>
                 </plugin>
                 <!-- package release files -->
