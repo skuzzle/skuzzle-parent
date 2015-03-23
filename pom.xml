@@ -21,6 +21,9 @@
         <github.name>skuzzle-parent</github.name>
         <site.name>skuzzle-parent</site.name>
 
+        <!-- Name of the SCM profile in the settings.xml -->
+        <project.scm.id>github</project.scm.id>
+
         <!-- Tests -->
         <skipIT>false</skipIT>
 
@@ -72,7 +75,7 @@
 
     <scm>
         <connection>scm:git:git://github.com/skuzzle/${github.name}.git</connection>
-        <developerConnection>scm:git:git@github.com:skuzzle/${github.name}.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/skuzzle/${github.name}.git</developerConnection>
         <url>https://github.com/skuzzle/${github.name}</url>
         <tag>HEAD</tag>
     </scm>
