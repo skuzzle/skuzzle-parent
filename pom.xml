@@ -269,6 +269,7 @@
                                 <goal>analyze-only</goal>
                             </goals>
                             <configuration>
+                                <ignoreNonCompile>true</ignoreNonCompile>
                                 <failOnWarning>true</failOnWarning>
                             </configuration>
                         </execution>
