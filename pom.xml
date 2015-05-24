@@ -43,6 +43,9 @@
         <ftp.id>skuzzle-ftp</ftp.id>
         <ftp.url>ftp://skuzzle.de</ftp.url>
         <ftp.basePath>html/maven</ftp.basePath>
+        
+        <!-- Nexus Deploy -->
+        <skipDeploy>false</skipDeploy>
 
         <!-- Sonar Qube -->
         <sonar.language>java</sonar.language>
@@ -191,6 +194,7 @@
                             <configuration>
                                 <append>true</append>
                                 <skip>${skipIT}</skip>
+                                <destFile>${sonar.jacoco.itReportPath}</destFile>
                             </configuration>
                         </execution>
                     </executions>
@@ -297,6 +301,27 @@
                         </execution>
                     </executions>
                 </plugin>
+                
+                <!-- Add Integration Test source folder -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>1.9.1</version>
+                    <executions>
+                        <execution>
+                            <id>add-it-sources</id>
+                            <goals>
+                                <goal>add-test-source</goal>
+                            </goals>
+                            <configuration>
+                                <sources>
+                                    <source>${project.basedir}/src/it/java</source>
+                                </sources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
                 <!-- Signing artifacts -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -325,6 +350,7 @@
                         <serverId>sonatype-nexus-snapshots</serverId>
                         <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                         <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                        <skipNexusStagingDeployMojo>${skipDeploy}</skipNexusStagingDeployMojo>
                     </configuration>
                 </plugin>
                 <!-- Perform Release -->
@@ -369,6 +395,11 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <!-- integration test source folders for all -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
