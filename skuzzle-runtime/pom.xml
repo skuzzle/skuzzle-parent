@@ -25,20 +25,20 @@
         <mockito.version>1.10.19</mockito.version>
         <powermock.version>1.6.2</powermock.version>
         <guice.version>4.0-beta5</guice.version>
-        <jsf.version>2.1.7</jsf.version>
+        <jsf.version>2.2.8</jsf.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <!-- JSF -->
             <dependency>
-                <groupId>com.sun.faces</groupId>
-                <artifactId>jsf-api</artifactId>
+                <groupId>org.apache.myfaces.core</groupId>
+                <artifactId>myfaces-api</artifactId>
                 <version>${jsf.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.sun.faces</groupId>
-                <artifactId>jsf-impl</artifactId>
+                <groupId>org.apache.myfaces.core</groupId>
+                <artifactId>myfaces-impl</artifactId>
                 <version>${jsf.version}</version>
             </dependency>
             <dependency>
@@ -50,6 +50,13 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
                 <version>3.0-alpha-1</version>
+            </dependency>
+
+            <!-- More javax -->
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>1</version>
             </dependency>
 
             <!-- Logging -->
@@ -75,12 +82,12 @@
                 <artifactId>auto-service</artifactId>
                 <version>1.0-rc2</version>
             </dependency>
-            
             <dependency>
-                <groupId>javax.inject</groupId>
-                <artifactId>javax.inject</artifactId>
-                <version>1</version>
+                <groupId>com.google.jimfs</groupId>
+                <artifactId>jimfs</artifactId>
+                <version>1.0</version>
             </dependency>
+
             <!-- Guice -->
             <dependency>
                 <groupId>com.google.inject</groupId>
