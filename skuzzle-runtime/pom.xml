@@ -64,6 +64,11 @@
                 <artifactId>jeve</artifactId>
                 <version>3.0.0</version>
             </dependency>
+            <dependency>
+                <groupId>de.skuzzle.inject</groupId>
+                <artifactId>reguice</artifactId>
+                <version>0.3.0</version>
+            </dependency>
 
             <!-- JSF -->
             <dependency>
