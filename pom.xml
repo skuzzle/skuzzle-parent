@@ -25,6 +25,7 @@
 
         <!-- Tests -->
         <skipIT>false</skipIT>
+        <skipMT>true</skipMT>
 
         <!-- Java Version -->
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -32,7 +33,7 @@
 
         <!-- Versions -->
         <javadoc.version>2.10.1</javadoc.version>
-        <jacoco.version>0.7.6.201602180812</jacoco.version>
+        <jacoco.version>0.7.9</jacoco.version>
         <sonar.maven.version>3.0.1</sonar.maven.version>
         <pitest.version>1.1.9</pitest.version>
 
@@ -144,7 +145,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.1</version>
+                    <version>3.7.0</version>
                     <configuration>
                         <source>${maven.compiler.source}</source>
                         <target>${maven.compiler.target}</target>
@@ -206,6 +207,7 @@
                     <artifactId>pitest-maven</artifactId>
                     <version>${pitest.version}</version>
                     <configuration>
+                        <skip>${skipMT}</skip>
                         <targetClasses>
                             <param>de.skuzzle.*</param>
                         </targetClasses>
