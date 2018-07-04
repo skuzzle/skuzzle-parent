@@ -33,9 +33,9 @@
 
         <!-- Versions -->
         <javadoc.version>2.10.1</javadoc.version>
-        <jacoco.version>0.7.9</jacoco.version>
-        <sonar.maven.version>3.0.1</sonar.maven.version>
-        <pitest.version>1.1.9</pitest.version>
+        <jacoco.version>0.8.1</jacoco.version>
+        <sonar.maven.version>3.4.1.168</sonar.maven.version>
+        <pitest.version>1.4.0</pitest.version>
 
         <!-- Dependency Analyzer -->
         <!-- Fail if dependencies have not been declared explicitly -->
@@ -135,7 +135,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ftp</artifactId>
-                <version>1.0-beta-6</version>
+                <version>3.1.0</version>
             </extension>
         </extensions>
 
@@ -162,19 +162,19 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.4</version>
+                    <version>3.7.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>2.7</version>
+                    <version>3.0.0</version>
                 </plugin>
 
                 <!-- Deploy test Coverage to Coveralls -->
                 <plugin>
                     <groupId>org.eluder.coveralls</groupId>
                     <artifactId>coveralls-maven-plugin</artifactId>
-                    <version>4.1.0</version>
+                    <version>4.3.0</version>
                 </plugin>
                 <!-- Configure test coverage -->
                 <plugin>
@@ -261,7 +261,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>2.2.1</version>
+                    <version>3.0.1</version>
                     <executions>
                         <execution>
                             <id>attach-sources</id>
@@ -275,13 +275,13 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
-                    <version>2.6</version>
+                    <version>3.2.2</version>
                 </plugin>
                 <!-- Package tests into jar file -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.2</version>
+                    <version>3.1.0</version>
                     <configuration>
                         <archive>                   
                             <manifest>
@@ -305,7 +305,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>2.9</version>
+                    <version>3.1.1</version>
                     <executions>
                         <execution>
                             <id>analyze-dependencies</id>
@@ -325,13 +325,13 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.18</version>
+                    <version>2.22.0</version>
                 </plugin>
                 <!-- Integration Tests -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>2.6</version>
+                    <version>2.22.0</version>
                     <executions>
                         <execution>
                             <id>integration-test</id>
@@ -347,7 +347,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>1.9.1</version>
+                    <version>3.0.0</version>
                     <executions>
                         <execution>
                             <id>add-it-sources</id>
@@ -367,7 +367,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>1.5</version>
+                    <version>1.6</version>
                     <executions>
                         <execution>
                             <id>sign-artifacts</id>
@@ -385,7 +385,7 @@
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
                     <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>1.6.3</version>
+                    <version>1.6.8</version>
                     <extensions>true</extensions>
                     <configuration>
                         <serverId>sonatype-nexus-snapshots</serverId>
