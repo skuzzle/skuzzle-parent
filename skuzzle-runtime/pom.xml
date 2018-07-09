@@ -12,7 +12,7 @@
     </parent>
 
     <artifactId>skuzzle-runtime</artifactId>
-    <version>0.9.6</version>
+    <version>0.9.6-SNAPSHOT</version>
     <packaging>pom</packaging>
     <url>http://www.skuzzle.de/maven/</url>
 
@@ -385,8 +385,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-  <scm>
-    <tag>v0.9.6</tag>
-  </scm>
 </project>
