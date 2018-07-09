@@ -32,7 +32,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
 
         <!-- Versions -->
-        <javadoc.version>2.10.1</javadoc.version>
+        <javadoc.version>3.0.1</javadoc.version>
         <jacoco.version>0.8.1</jacoco.version>
         <sonar.maven.version>3.4.1.168</sonar.maven.version>
         <pitest.version>1.4.0</pitest.version>
