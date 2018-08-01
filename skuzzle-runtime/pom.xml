@@ -22,7 +22,7 @@
 
     <properties>
         <!-- Versions -->
-        <mockito.version>2.0.2-beta</mockito.version>
+        <mockito.version>2.21.0</mockito.version>
         <powermock.version>1.7.4</powermock.version>
         <guice.version>4.2.0</guice.version>
         <jsf.version>2.3.1</jsf.version>
@@ -329,11 +329,23 @@
 			</dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
+                <artifactId>mockito-core</artifactId>
                 <version>${mockito.version}</version>
                 <scope>test</scope>
             </dependency>
-
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-core</artifactId>
+                <version>1.3</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>nl.jqno.equalsverifier</groupId>
+                <artifactId>equalsverifier</artifactId>
+                <version>2.4.8</version>
+                <scope>test</scope>
+            </dependency>
+        
             <!-- PowerMock -->
             <dependency>
                 <groupId>org.powermock</groupId>
