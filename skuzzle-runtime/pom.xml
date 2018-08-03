@@ -345,7 +345,18 @@
                 <version>2.4.8</version>
                 <scope>test</scope>
             </dependency>
-        
+            <dependency>
+              <groupId>org.assertj</groupId>
+              <artifactId>assertj-core</artifactId>
+              <version>3.10.0</version>
+              <scope>test</scope>
+            </dependency>
+            <dependency>
+              <groupId>org.assertj</groupId>
+              <artifactId>assertj-guava</artifactId>
+              <version>3.2.0</version>
+              <scope>test</scope>
+            </dependency>
             <!-- PowerMock -->
             <dependency>
                 <groupId>org.powermock</groupId>
