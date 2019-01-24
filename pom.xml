@@ -377,7 +377,8 @@
                             </goals>
                             <configuration>
                             	<gpgArguments>
-                            		<arg>"--pinentry-mode loopback"</arg>
+                            		<arg>--pinentry-mode</arg>
+                            		<arg>loopback</arg>
                             		<arg>--batch</arg>
                             	</gpgArguments>
                                 <useAgent>false</useAgent>
