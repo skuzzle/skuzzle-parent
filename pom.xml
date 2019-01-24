@@ -47,6 +47,7 @@
         <skipDeploy>false</skipDeploy>
         
         <!-- Site Deploy -->
+        <maven.site.skip>true</maven.site.skip>
         <maven.site.deploy.skip>true</maven.site.deploy.skip>
         
         <!-- Sonar Qube -->
