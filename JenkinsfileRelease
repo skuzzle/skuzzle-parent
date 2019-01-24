@@ -9,6 +9,12 @@ pipeline {
     GPG_SECRET = credentials('gpg_password')
   }
   stages {
+    stage ('Set Git Information') {
+        steps {
+            sh 'git config --global user.email "simon.taddiken@gmail.com"'
+            sh 'git config --global user.name "simon Taddiken"'
+        }
+    }
     stage('Prepare') {
       steps {
         sh 'mvn -B release:prepare'
