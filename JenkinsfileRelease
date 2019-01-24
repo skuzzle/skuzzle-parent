@@ -7,6 +7,7 @@ pipeline {
   }
   environment {
     GPG_SECRET = credentials('gpg_password')
+    GITHUB = credentials('Github-Username-Pw')
   }
   stages {
     stage ('Set Git Information') {
@@ -17,12 +18,12 @@ pipeline {
     }
     stage('Prepare') {
       steps {
-        sh 'mvn -B release:prepare'
+        sh 'mvn -B release:prepare -Dpassword=${GITHUB_PSW} -Dusername=${GITHUB_USR}'
       }
     }
     stage('Perform') {
       steps {
-        sh 'mvn -B release:perform -Dgpg.passphrase=${GPG_SECRET}'
+        sh 'mvn -B release:perform -Dgpg.passphrase=${GPG_SECRET} -Dpassword=${GITHUB_PSW} -Dusername=${GITHUB_USR}'
       }
     }
   }
