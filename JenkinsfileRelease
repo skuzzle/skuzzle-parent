@@ -18,7 +18,7 @@ pipeline {
     }
     stage ('GPG Test') {
       steps {
-        sh 'mvn clean verify -Pskuzzle.release'
+        sh 'mvn clean verify -Pskuzzle.release -X'
       }
     }
     stage('Prepare') {
