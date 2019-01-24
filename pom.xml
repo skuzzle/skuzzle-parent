@@ -377,6 +377,7 @@
                             </goals>
                             <configuration>
                                 <useAgent>false</useAgent>
+                                <keyname>simon.taddiken@gmail.com</keyname>
                             </configuration>
                         </execution>
                     </executions>
