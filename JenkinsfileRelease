@@ -18,7 +18,7 @@ pipeline {
     }
     stage('GPG Test') {
       steps {
-        sh 'mvn -B clean verify -Prelease -Dgpg.passphrase=${GPG_SECRET}'
+        sh 'mvn -B -X clean verify -Prelease -Dgpg.passphrase=${GPG_SECRET}'
       }
     }
     stage('Prepare') {
