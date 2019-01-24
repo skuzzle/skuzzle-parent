@@ -18,6 +18,7 @@ pipeline {
     }
     stage ('GPG Test') {
       steps {
+        sh 'export GPG_TTY=$(tty)'
         sh 'mvn clean verify -Prelease -Dgpg.passphrase=${GPG_SECRET}  -X'
       }
     }
