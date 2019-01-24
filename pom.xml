@@ -6,7 +6,7 @@
 
     <groupId>de.skuzzle</groupId>
     <artifactId>skuzzle-parent</artifactId>
-    <version>2.0.4</version>
+    <version>2.0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     <url>http://www.skuzzle.de/maven/</url>
 
@@ -81,7 +81,7 @@
         <connection>scm:git:git://github.com/skuzzle/${github.name}.git</connection>
         <developerConnection>scm:git:https://github.com/skuzzle/${github.name}.git</developerConnection>
         <url>https://github.com/skuzzle/${github.name}</url>
-        <tag>v2.0.4</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <developers>
