@@ -23,12 +23,12 @@ pipeline {
     }
     stage('Prepare') {
       steps {
-        sh 'mvn -B release:prepare -Dpassword=${GITHUB_PSW} -Dusername=${GITHUB_USR} -DdryRun=true'
+        sh 'mvn -B release:prepare -Dpassword=${GITHUB_PSW} -Dusername=${GITHUB_USR}'
       }
     }
     stage('Perform') {
       steps {
-        sh 'mvn -B -Prelease release:perform -Dgpg.passphrase=${GPG_SECRET} -Dpassword=${GITHUB_PSW} -Dusername=${GITHUB_USR} -DdryRun=true'
+        sh 'mvn -B -X -Prelease release:perform -Dgpg.passphrase=${GPG_SECRET} -Dpassword=${GITHUB_PSW} -Dusername=${GITHUB_USR}'
       }
     }
   }
