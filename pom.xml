@@ -32,23 +32,23 @@
         <maven.compiler.source>1.8</maven.compiler.source>
 
         <!-- Versions -->
+        <maven.surefire.version>3.0.0-M3</maven.surefire.version>
+        <maven.failsafe.version>3.0.0-M3</maven.failsafe.version>
         <javadoc.version>3.0.1</javadoc.version>
-        <jacoco.version>0.8.1</jacoco.version>
+        <jacoco.version>0.8.3</jacoco.version>
         <sonar.maven.version>3.4.1.1168</sonar.maven.version>
         <pitest.version>1.4.0</pitest.version>
 
         <!-- Dependency Analyzer -->
         <!-- Fail if dependencies have not been declared explicitly -->
         <failOnWarning>true</failOnWarning>
-
-        <!-- FTP Site Deploy -->
-        <ftp.id>skuzzle-ftp</ftp.id>
-        <ftp.url>ftp://skuzzle.de</ftp.url>
-        <ftp.basePath>html/maven</ftp.basePath>
         
         <!-- Nexus Deploy -->
         <skipDeploy>false</skipDeploy>
-
+        
+        <!-- Site Deploy -->
+        <maven.site.deploy.skip>true</maven.site.deploy.skip>
+        
         <!-- Sonar Qube -->
         <sonar.language>java</sonar.language>
         <sonar.skipPackageDesign>true</sonar.skipPackageDesign>
@@ -130,22 +130,13 @@
     </repositories>
 
     <build>
-        <extensions>
-            <!-- Enable FTP deployment for reports -->
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-ftp</artifactId>
-                <version>3.1.0</version>
-            </extension>
-        </extensions>
-
         <pluginManagement>
             <plugins>
                 <!-- Compile sources -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.7.0</version>
+                    <version>3.8.0</version>
                     <configuration>
                         <source>${maven.compiler.source}</source>
                         <target>${maven.compiler.target}</target>
@@ -156,18 +147,6 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
                     <version>${sonar.maven.version}</version>
-                </plugin>
-
-                <!-- Generate project's site -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.7.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>3.0.0</version>
                 </plugin>
 
                 <!-- Deploy test Coverage to Coveralls -->
@@ -183,6 +162,7 @@
 						</dependency>
 					</dependencies>
 				</plugin>
+                
                 <!-- Configure test coverage -->
                 <plugin>
                     <groupId>org.jacoco</groupId>
@@ -313,6 +293,13 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>3.1.1</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.shared</groupId>
+                            <artifactId>maven-dependency-analyzer</artifactId>
+                            <version>1.11.1</version>
+                        </dependency>
+                    </dependencies>
                     <executions>
                         <execution>
                             <id>analyze-dependencies</id>
@@ -332,13 +319,19 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.22.0</version>
+                    <version>${maven.surefire.version}</version>
+                    <configuration>
+                        <forkCount>0</forkCount>
+                    </configuration>
                 </plugin>
                 <!-- Integration Tests -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>2.22.0</version>
+                    <version>${maven.failsafe.version}</version>
+                    <configuration>
+                        <forkCount>0</forkCount>
+                    </configuration>
                     <executions>
                         <execution>
                             <id>integration-test</id>
