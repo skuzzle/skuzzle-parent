@@ -6,7 +6,7 @@
 
     <groupId>de.skuzzle</groupId>
     <artifactId>skuzzle-parent</artifactId>
-    <version>2.0.2-SNAPSHOT</version>
+    <version>2.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <url>http://www.skuzzle.de/maven/</url>
 
