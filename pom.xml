@@ -376,6 +376,11 @@
                                 <goal>sign</goal>
                             </goals>
                             <configuration>
+                            	<gpgArguments>
+                            		<arg>--pinentry-mode loopback</arg>
+                            		<arg>--command-fd 0</arg>
+                            		<arg>--batch</arg>
+                            	</gpgArguments>
                                 <useAgent>false</useAgent>
                                 <keyname>simon.taddiken@gmail.com</keyname>
                             </configuration>
