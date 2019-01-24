@@ -18,7 +18,7 @@ pipeline {
     }
     stage('GPG Test') {
       steps {
-        sh 'mvn -B -X clean verify -Prelease -Dgpg.passphrase=${GPG_SECRET}'
+        sh 'mvn --batch-mode -X clean verify -Prelease -Dgpg.passphrase=${GPG_SECRET}'
       }
     }
     stage('Prepare') {
@@ -28,7 +28,7 @@ pipeline {
     }
     stage('Perform') {
       steps {
-        sh 'mvn -B -X -Prelease release:perform -Dgpg.passphrase=${GPG_SECRET} -Dpassword=${GITHUB_PSW} -Dusername=${GITHUB_USR}'
+        sh 'mvn -B -X release:perform -Dgpg.passphrase=${GPG_SECRET} -Dpassword=${GITHUB_PSW} -Dusername=${GITHUB_USR}'
       }
     }
   }
