@@ -16,11 +16,6 @@ pipeline {
             sh 'git config --global user.name "Simon Taddiken"'
         }
     }
-    stage('GPG Test') {
-      steps {
-        sh 'mvn --batch-mode -X clean verify -Prelease -Dgpg.passphrase=${GPG_SECRET}'
-      }
-    }
     stage('Prepare') {
       steps {
         sh 'mvn -B release:prepare -Dpassword=${GITHUB_PSW} -Dusername=${GITHUB_USR}'
@@ -28,7 +23,7 @@ pipeline {
     }
     stage('Perform') {
       steps {
-        sh 'mvn -B -X release:perform -Darguments="-Dgpg.passphrase=${GPG_SECRET} -Dpassword=${GITHUB_PSW} -Dusername=${GITHUB_USR}"'
+        sh 'mvn -B release:perform -Darguments="-Dgpg.passphrase=${GPG_SECRET} -Dpassword=${GITHUB_PSW} -Dusername=${GITHUB_USR}"'
       }
     }
   }
