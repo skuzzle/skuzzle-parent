@@ -436,6 +436,11 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 			</plugin>
+            <!-- Enable integration tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
 			<!-- Mutation tests for all -->
 			<plugin>
 				<groupId>org.pitest</groupId>
