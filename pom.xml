@@ -406,6 +406,7 @@
 						<useReleaseProfile>true</useReleaseProfile>
 						<releaseProfiles>release</releaseProfiles>
 						<prepareGoals>deploy</prepareGoals>
+						<goals>deploy</goals>
 						<tagNameFormat>v@{project.version}</tagNameFormat>
 					</configuration>
 				</plugin>
