@@ -9,6 +9,8 @@ pipeline {
     stage('Build') {
       steps {
         sh 'id'
+        sh 'pwd'
+        sh 'ls -la /var/maven'
         sh 'mvn -Duser.home=/var/maven clean deploy'
       }
     }
