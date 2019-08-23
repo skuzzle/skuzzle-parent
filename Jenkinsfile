@@ -8,9 +8,6 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'id'
-        sh 'pwd'
-        sh 'ls -la /var/maven'
         sh 'mvn clean deploy'
       }
     }

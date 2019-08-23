@@ -2,12 +2,14 @@ pipeline {
   agent {
     docker {
       image 'maven:3.6-jdk-8'
+      args '-v /home/jenkins/.m2:/var/maven/.m2 -v /home/jenkins/.gnupg:/home/jenkins/.gnupg -e MAVEN_CONFIG=/var/maven/.m2 -e MAVEN_OPTS=-Duser.home=/var/maven'
+      
       args '-v $HOME/.m2:/root/.m2 -v $HOME/.gnupg:/root/.gnupg -u 0:0'
     }
   }
   environment {
     GPG_SECRET = credentials('gpg_password')
-    GITHUB = credentials('Github-Username-Pw')
+    GITHUB = credentials('github')
   }
   stages {
     stage ('Set Git Information') {
