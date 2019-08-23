@@ -374,7 +374,6 @@
                                     <arg>loopback</arg>
                                     <arg>--batch</arg>
                                 </gpgArguments>
-                                <useAgent>false</useAgent>
                                 <keyname>simon.taddiken@gmail.com</keyname>
                             </configuration>
                         </execution>
