@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       image 'maven:3.6-jdk-11'
-      args '-v /home/jenkins/.m2:/var/maven/.m2 -v /home/jenkins/.gnupg:/.gnupg -e MAVEN_CONFIG=/var/maven/.m2 -e MAVEN_OPTS=-Duser.home=/var/maven'
+      args '-v $HOME/.m2:/root/.m2 -v $HOME/.gnupg:/root/.gnupg -u 0:0'
     }
   }
   environment {
@@ -12,18 +12,23 @@ pipeline {
   stages {
     stage ('Set Git Information') {
         steps {
-            sh 'git config --local user.email "simon.taddiken@gmail.com"'
-            sh 'git config --local user.name "Simon Taddiken"'
+            sh 'git config --global user.email "simon.taddiken@gmail.com"'
+            sh 'git config --global user.name "Simon Taddiken"'
         }
     }
-    stage('Prepare') {
+    stage('Create release branch') {
       steps {
-        sh 'mvn -B release:prepare -Dpassword=${GITHUB_PSW} -Dusername=${GITHUB_USR}'
+        sh 'mvn -B gitflow:release-start'
       }
     }
-    stage('Perform') {
+    stage('Verify release') {
       steps {
-        sh 'mvn -B release:perform -Darguments="-Dgpg.passphrase=${GPG_SECRET} -Dpassword=${GITHUB_PSW} -Dusername=${GITHUB_USR}"'
+        sh 'mvn -B -Prelease verify'
+      }
+    }
+    stage('Perform release') {
+      steps {
+        sh 'mvn -B gitflow:release-finish -DargLine="-Prelease -B -Dgpg.passphrase=${GPG_SECRET}"'
       }
     }
   }

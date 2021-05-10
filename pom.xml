@@ -56,7 +56,7 @@
 
         <!-- Site Deploy -->
         <maven.site.skip>true</maven.site.skip>
-        
+
         <!-- Sonar Qube -->
         <sonar.language>java</sonar.language>
         <sonar.skipPackageDesign>true</sonar.skipPackageDesign>
@@ -408,7 +408,7 @@
                         <skipTestProject>true</skipTestProject>
                     </configuration>
                 </plugin>
-                
+
                 <!-- package release files -->
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
@@ -492,6 +492,40 @@
     </reporting>
 
     <profiles>
+        <!-- only for releasing skuzzle-parent but not extending projects -->
+        <profile>
+            <id>release-this</id>
+            <build>
+                <plugins>
+                    <!-- Enable signing and sonatype deploy -->
+                    <plugins>
+                        <!-- Enable signing and sonatype deploy -->
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-gpg-plugin</artifactId>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.sonatype.plugins</groupId>
+                            <artifactId>nexus-staging-maven-plugin</artifactId>
+                        </plugin>
+                        <plugin>
+                            <groupId>com.amashchenko.maven.plugin</groupId>
+                            <artifactId>gitflow-maven-plugin</artifactId>
+                            <configuration>
+                                <pushRemote>true</pushRemote>                                                                      
+                                <fetchRemote>true</fetchRemote>
+                                <postReleaseGoals>deploy</postReleaseGoals>
+                                <skipTestProject>true</skipTestProject>
+                                <gitFlowConfig>
+                                    <productionBranch>master</productionBranch>
+                                    <developmentBranch>dev</developmentBranch>
+                                </gitFlowConfig>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>release</id>
             <activation>
