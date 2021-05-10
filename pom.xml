@@ -406,6 +406,9 @@
                         <lineLength>120</lineLength>
                         <postReleaseGoals>deploy</postReleaseGoals>
                         <skipTestProject>true</skipTestProject>
+                        <gitFlowConfig>
+                            <versionTagPrefix>v</versionTagPrefix>
+                        </gitFlowConfig>
                     </configuration>
                 </plugin>
 
@@ -496,8 +499,6 @@
         <profile>
             <id>release-this</id>
             <build>
-
-
                 <plugins>
                     <!-- Enable signing and sonatype deploy -->
                     <plugin>
@@ -516,6 +517,8 @@
                             <fetchRemote>true</fetchRemote>
                             <postReleaseGoals>deploy</postReleaseGoals>
                             <skipTestProject>true</skipTestProject>
+                            <verbose>true</verbose>
+                            <details>true</details>
                             <gitFlowConfig>
                                 <productionBranch>master</productionBranch>
                                 <developmentBranch>dev</developmentBranch>
