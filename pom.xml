@@ -6,9 +6,8 @@
 
     <groupId>de.skuzzle</groupId>
     <artifactId>skuzzle-parent</artifactId>
-    <version>2.0.16-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <url>http://www.skuzzle.de/maven/</url>
 
     <name>skuzzle-parent</name>
     <description>Parent POM for all skuzzle GitHub Projects</description>
@@ -28,16 +27,25 @@
         <skipMT>true</skipMT>
 
         <!-- Java Version -->
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.release>11</maven.compiler.release>
 
         <!-- Versions -->
-        <maven.surefire.version>3.0.0-M3</maven.surefire.version>
-        <maven.failsafe.version>3.0.0-M3</maven.failsafe.version>
-        <javadoc.version>3.0.1</javadoc.version>
-        <jacoco.version>0.8.3</jacoco.version>
-        <sonar.maven.version>3.4.1.1168</sonar.maven.version>
-        <pitest.version>1.4.0</pitest.version>
+        <maven.surefire.version>3.0.0-M5</maven.surefire.version>
+        <maven.failsafe.version>3.0.0-M5</maven.failsafe.version>
+        <maven.gpg-plugin.version>3.0.1</maven.gpg-plugin.version>
+        <maven.javadoc-plugin.version>3.2.0</maven.javadoc-plugin.version>
+        <maven.source-plugin.version>3.2.0</maven.source-plugin.version>
+        <maven.jar-plugin.version>3.2.0</maven.jar-plugin.version>
+        <maven.dependency-plugin.version>3.1.2</maven.dependency-plugin.version>
+        <maven.build-helper-plugin.version>3.2.0</maven.build-helper-plugin.version>
+        <maven.release-plugin.version>3.0.0-M4</maven.release-plugin.version>
+        <coveralls.plugin.version>4.3.0</coveralls.plugin.version>
+        <jacoco-plugin.version>0.8.6</jacoco-plugin.version>
+        <pitest-plugin.version>1.6.6</pitest-plugin.version>
+        <nexus-staging-plugin.version>1.6.8</nexus-staging-plugin.version>
+        <gitflow-maven-plugin.version>1.16.0</gitflow-maven-plugin.version>
 
         <!-- Dependency Analyzer -->
         <!-- Fail if dependencies have not been declared explicitly -->
@@ -48,7 +56,7 @@
 
         <!-- Site Deploy -->
         <maven.site.skip>true</maven.site.skip>
-
+        
         <!-- Sonar Qube -->
         <sonar.language>java</sonar.language>
         <sonar.skipPackageDesign>true</sonar.skipPackageDesign>
@@ -131,19 +139,8 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.0</version>
-                    <configuration>
-                        <source>${maven.compiler.source}</source>
-                        <target>${maven.compiler.target}</target>
-                    </configuration>
+                    <version>3.8.1</version>
                 </plugin>
-
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>sonar-maven-plugin</artifactId>
-                    <version>${sonar.maven.version}</version>
-                </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
@@ -157,7 +154,7 @@
                 <plugin>
                     <groupId>org.eluder.coveralls</groupId>
                     <artifactId>coveralls-maven-plugin</artifactId>
-                    <version>4.3.0</version>
+                    <version>${coveralls.plugin.version}</version>
                     <dependencies>
                         <dependency>
                             <groupId>javax.xml.bind</groupId>
@@ -171,7 +168,7 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>${jacoco.version}</version>
+                    <version>${jacoco-plugin.version}</version>
                     <executions>
                         <execution>
                             <id>prepare-code-coverage-unit-tests</id>
@@ -196,7 +193,7 @@
                 <plugin>
                     <groupId>org.pitest</groupId>
                     <artifactId>pitest-maven</artifactId>
-                    <version>${pitest.version}</version>
+                    <version>${pitest-plugin.version}</version>
                     <configuration>
                         <skip>${skipMT}</skip>
                         <targetClasses>
@@ -224,7 +221,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>${javadoc.version}</version>
+                    <version>${maven.javadoc-plugin.version}</version>
                     <executions>
                         <execution>
                             <id>fix-java-doc</id>
@@ -252,7 +249,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>${maven.source-plugin.version}</version>
                     <executions>
                         <execution>
                             <id>attach-sources</id>
@@ -267,7 +264,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>${maven.jar-plugin.version}</version>
                     <configuration>
                         <archive>
                             <manifest>
@@ -291,14 +288,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.1.1</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.apache.maven.shared</groupId>
-                            <artifactId>maven-dependency-analyzer</artifactId>
-                            <version>1.11.1</version>
-                        </dependency>
-                    </dependencies>
+                    <version>${maven.dependency-plugin.version}</version>
                     <executions>
                         <execution>
                             <id>analyze-dependencies</id>
@@ -340,7 +330,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>${maven.build-helper-plugin.version}</version>
                     <executions>
                         <execution>
                             <id>add-it-sources</id>
@@ -360,7 +350,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>1.6</version>
+                    <version>${maven.gpg-plugin.version}</version>
                     <executions>
                         <execution>
                             <id>sign-artifacts</id>
@@ -383,7 +373,7 @@
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
                     <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>1.6.8</version>
+                    <version>${nexus-staging-plugin.version}</version>
                     <extensions>true</extensions>
                     <configuration>
                         <serverId>sonatype-nexus-snapshots</serverId>
@@ -392,11 +382,11 @@
                         <skipNexusStagingDeployMojo>${skipDeploy}</skipNexusStagingDeployMojo>
                     </configuration>
                 </plugin>
-                <!-- Perform Release -->
+                <!-- Perform Release (deprecated) -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5.3</version>
+                    <version>${maven.release-plugin.version}</version>
                     <configuration>
                         <mavenExecutorId>forked-path</mavenExecutorId>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
@@ -407,6 +397,18 @@
                         <tagNameFormat>v@{project.version}</tagNameFormat>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>com.amashchenko.maven.plugin</groupId>
+                    <artifactId>gitflow-maven-plugin</artifactId>
+                    <version>${gitflow-maven-plugin.version}</version>
+                    <configuration>
+                        <indentSize>4</indentSize>
+                        <lineLength>120</lineLength>
+                        <postReleaseGoals>deploy</postReleaseGoals>
+                        <skipTestProject>true</skipTestProject>
+                    </configuration>
+                </plugin>
+                
                 <!-- package release files -->
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
