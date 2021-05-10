@@ -18,17 +18,17 @@ pipeline {
     }
     stage('Create release branch') {
       steps {
-        sh 'mvn -B gitflow:release-start'
+        sh 'mvn -B -Prelease-this gitflow:release-start'
       }
     }
     stage('Verify release') {
       steps {
-        sh 'mvn -B -Prelease verify'
+        sh 'mvn -B -Prelease-this verify'
       }
     }
     stage('Perform release') {
       steps {
-        sh 'mvn -B gitflow:release-finish -DargLine="-Prelease -B -Dgpg.passphrase=${GPG_SECRET}"'
+        sh 'mvn -B -Prelease-this gitflow:release-finish -DargLine="-Prelease-this -B -Dgpg.passphrase=${GPG_SECRET}"'
       }
     }
   }
