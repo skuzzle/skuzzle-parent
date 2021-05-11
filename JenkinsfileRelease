@@ -8,22 +8,33 @@ pipeline {
   environment {
     GPG_SECRET = credentials('gpg_password')
     GITHUB = credentials('Github-Username-Pw')
+    GIT_ASKPASS='./.git-askpass'
   }
   stages {
     stage ('Set Git Information') {
         steps {
-            sh 'git config --local user.email "simon.taddiken@gmail.com"'
-            sh 'git config --local user.name "Simon Taddiken"'
+            sh 'echo \'echo \$GITHUB_PSW\' > ./.git-askpass'
+            sh 'chmod +x ./.git-askpass'
+            sh 'git config url."https://api@github.com/".insteadOf "https://github.com/"'
+            sh 'git config url."https://ssh@github.com/".insteadOf "ssh://git@github.com/"'
+            sh 'git config url."https://git@github.com/".insteadOf "git@github.com:"'
+            sh 'git config user.email "simon.taddiken@gmail.com"'
+            sh 'git config user.name "Simon Taddiken"'
         }
     }
-    stage('Prepare') {
+    stage('Create release branch') {
       steps {
-        sh 'mvn -B release:prepare -Dpassword=${GITHUB_PSW} -Dusername=${GITHUB_USR}'
+        sh 'mvn -B -Prelease-this gitflow:release-start'
       }
     }
-    stage('Perform') {
+    stage('Verify release') {
       steps {
-        sh 'mvn -B release:perform -Darguments="-Dgpg.passphrase=${GPG_SECRET} -Dpassword=${GITHUB_PSW} -Dusername=${GITHUB_USR}"'
+        sh 'mvn -B -Prelease-this -Dgpg.passphrase=${GPG_SECRET} verify'
+      }
+    }
+    stage('Perform release') {
+      steps {
+        sh 'mvn -B -Prelease-this gitflow:release-finish -DargLine="-Prelease-this -B -Dgpg.passphrase=${GPG_SECRET}"'
       }
     }
   }

@@ -6,13 +6,14 @@
 
     <groupId>de.skuzzle</groupId>
     <artifactId>skuzzle-parent</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.0</version>
     <packaging>pom</packaging>
 
     <name>skuzzle-parent</name>
     <description>Parent POM for all skuzzle GitHub Projects</description>
     <inceptionYear>2014</inceptionYear>
-
+    <url>https://github.com/skuzzle-parent</url>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -56,7 +57,7 @@
 
         <!-- Site Deploy -->
         <maven.site.skip>true</maven.site.skip>
-        
+
         <!-- Sonar Qube -->
         <sonar.language>java</sonar.language>
         <sonar.skipPackageDesign>true</sonar.skipPackageDesign>
@@ -406,9 +407,12 @@
                         <lineLength>120</lineLength>
                         <postReleaseGoals>deploy</postReleaseGoals>
                         <skipTestProject>true</skipTestProject>
+                        <gitFlowConfig>
+                            <versionTagPrefix>v</versionTagPrefix>
+                        </gitFlowConfig>
                     </configuration>
                 </plugin>
-                
+
                 <!-- package release files -->
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
@@ -492,6 +496,40 @@
     </reporting>
 
     <profiles>
+        <!-- only for releasing skuzzle-parent but not extending projects -->
+        <profile>
+            <id>release-this</id>
+            <build>
+                <plugins>
+                    <!-- Enable signing and sonatype deploy -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.amashchenko.maven.plugin</groupId>
+                        <artifactId>gitflow-maven-plugin</artifactId>
+                        <configuration>
+                            <pushRemote>true</pushRemote>                                                                      
+                            <fetchRemote>true</fetchRemote>
+                            <postReleaseGoals>deploy</postReleaseGoals>
+                            <skipTestProject>true</skipTestProject>
+                            <verbose>true</verbose>
+                            <details>true</details>
+                            <gitFlowConfig>
+                                <productionBranch>master</productionBranch>
+                                <developmentBranch>dev</developmentBranch>
+                            </gitFlowConfig>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
         <profile>
             <id>release</id>
             <activation>
