@@ -12,7 +12,8 @@
     <name>skuzzle-parent</name>
     <description>Parent POM for all skuzzle GitHub Projects</description>
     <inceptionYear>2014</inceptionYear>
-
+    <url>https://github.com/skuzzle-parent</url>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
