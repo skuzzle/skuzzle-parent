@@ -13,7 +13,7 @@ pipeline {
   stages {
     stage ('Set Git Information') {
         steps {
-            sh 'echo \'echo \$GITHUB_PWD\' > ./.git-askpass'
+            sh 'echo \'echo \$GITHUB_PSW\' > ./.git-askpass'
             sh 'chmod +x ./.git-askpass'
             sh 'git config url."https://api@github.com/".insteadOf "https://github.com/"'
             sh 'git config url."https://ssh@github.com/".insteadOf "ssh://git@github.com/"'
