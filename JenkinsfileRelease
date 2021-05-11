@@ -8,13 +8,13 @@ pipeline {
   environment {
     GPG_SECRET = credentials('gpg_password')
     GITHUB = credentials('Github-Username-Pw')
-    GIT_ASKPASS='./.git-askpass'
+    GIT_ASKPASS='$HOME/.git-askpass'
   }
   stages {
     stage ('Set Git Information') {
         steps {
-            sh 'echo "echo $$GITHUB_PWD" > ./.git-askpass'
-            sh 'chmod +x .git-askpass'
+            sh 'echo "echo $$GITHUB_PWD" > $HOME//.git-askpass'
+            sh 'chmod +x $HOME/git-askpass'
             sh 'git config url."https://api@github.com/".insteadOf "https://github.com/"'
             sh 'git config url."https://ssh@github.com/".insteadOf "ssh://git@github.com/"'
             sh 'git config url."https://git@github.com/".insteadOf "git@github.com:"'
