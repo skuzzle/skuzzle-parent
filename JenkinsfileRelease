@@ -29,7 +29,7 @@ pipeline {
     }
     stage('Verify release') {
       steps {
-        sh 'mvn -B -Prelease-this verify'
+        sh 'mvn -B -Prelease-this -Dgpg.passphrase=${GPG_SECRET} verify'
       }
     }
     stage('Perform release') {
