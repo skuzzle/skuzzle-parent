@@ -8,7 +8,15 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'mvn clean deploy'
+        sh 'mvn clean install'
+      }
+    }
+    stage('Deploy SNAPSHOT') {
+      when {
+        branch 'dev'
+      }
+      steps {
+        sh 'mvn -Prelease-this deploy'
       }
     }
   }

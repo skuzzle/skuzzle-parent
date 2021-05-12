@@ -11,6 +11,16 @@ pipeline {
     GIT_ASKPASS='./.git-askpass'
   }
   stages {
+    stage ('Ensure dev branch') {
+      when {
+        expression {
+            return env.BRANCH_NAME != 'dev';
+        }
+      }
+      steps {
+        error("Releasing is only possible from dev branch")
+      }
+    }
     stage ('Set Git Information') {
         steps {
             sh 'echo \'echo \$GITHUB_PSW\' > ./.git-askpass'
