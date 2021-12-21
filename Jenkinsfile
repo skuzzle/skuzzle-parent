@@ -5,6 +5,9 @@ pipeline {
       args '-v /home/jenkins/.m2:/var/maven/.m2 -v /home/jenkins/.gnupg:/.gnupg -e MAVEN_CONFIG=/var/maven/.m2 -e MAVEN_OPTS=-Duser.home=/var/maven'
     }
   }
+  environment {
+    GPG_SECRET = credentials('gpg_password')
+  }
   stages {
     stage('Build') {
       steps {
@@ -16,7 +19,7 @@ pipeline {
         branch 'dev'
       }
       steps {
-        sh 'mvn -Prelease-this deploy'
+        sh 'mvn -Prelease-this -Dgpg.passphrase=${GPG_SECRET} deploy'
       }
     }
   }
