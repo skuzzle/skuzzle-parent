@@ -421,6 +421,8 @@
                         <lineLength>120</lineLength>
                         <postReleaseGoals>deploy</postReleaseGoals>
                         <skipTestProject>true</skipTestProject>
+                        <detail>true</detail>
+                        <verbose>true</verbose>
                         <gitFlowConfig>
                             <productionBranch>${github.main-branch}</productionBranch>
                             <developmentBranch>${github.dev-branch}</developmentBranch>
@@ -543,8 +545,6 @@
                         <groupId>com.amashchenko.maven.plugin</groupId>
                         <artifactId>gitflow-maven-plugin</artifactId>
                         <configuration>
-                            <pushRemote>true</pushRemote>
-                            <fetchRemote>true</fetchRemote>
                             <postReleaseGoals>deploy</postReleaseGoals>
                             <skipTestProject>true</skipTestProject>
                             <verbose>true</verbose>
