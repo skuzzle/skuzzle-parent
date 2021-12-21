@@ -1,7 +1,8 @@
 
 <!-- Parent Pom for all skuzzle GitHub Projects -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.skuzzle</groupId>
@@ -13,11 +14,16 @@
     <description>Parent POM for all skuzzle GitHub Projects</description>
     <inceptionYear>2014</inceptionYear>
     <url>https://github.com/skuzzle-parent</url>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <github.user>skuzzle</github.user>
         <github.name>skuzzle-parent</github.name>
+        <github.release-token>Release Token not set</github.release-token>
+        <github.main-branch>master</github.main-branch>
+        <github.dev-branch>dev</github.dev-branch>
+
         <site.name>skuzzle-parent</site.name>
 
         <!-- Name of the SCM profile in the settings.xml -->
@@ -28,25 +34,26 @@
         <skipMT>true</skipMT>
 
         <!-- Java Version -->
-        <maven.compiler.target>11</maven.compiler.target>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.release>11</maven.compiler.release>
+        <java.version>11</java.version>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
 
         <!-- Versions -->
         <maven.surefire.version>3.0.0-M5</maven.surefire.version>
         <maven.failsafe.version>3.0.0-M5</maven.failsafe.version>
         <maven.gpg-plugin.version>3.0.1</maven.gpg-plugin.version>
-        <maven.javadoc-plugin.version>3.2.0</maven.javadoc-plugin.version>
-        <maven.source-plugin.version>3.2.0</maven.source-plugin.version>
+        <maven.javadoc-plugin.version>3.3.1</maven.javadoc-plugin.version>
+        <maven.source-plugin.version>3.2.1</maven.source-plugin.version>
         <maven.jar-plugin.version>3.2.0</maven.jar-plugin.version>
-        <maven.dependency-plugin.version>3.1.2</maven.dependency-plugin.version>
+        <maven.dependency-plugin.version>3.2.0</maven.dependency-plugin.version>
         <maven.build-helper-plugin.version>3.2.0</maven.build-helper-plugin.version>
-        <maven.release-plugin.version>3.0.0-M4</maven.release-plugin.version>
         <coveralls.plugin.version>4.3.0</coveralls.plugin.version>
-        <jacoco-plugin.version>0.8.6</jacoco-plugin.version>
-        <pitest-plugin.version>1.6.6</pitest-plugin.version>
+        <jacoco-plugin.version>0.8.7</jacoco-plugin.version>
+        <pitest-plugin.version>1.7.3</pitest-plugin.version>
         <nexus-staging-plugin.version>1.6.8</nexus-staging-plugin.version>
-        <gitflow-maven-plugin.version>1.16.0</gitflow-maven-plugin.version>
+        <gitflow-maven-plugin.version>1.17.0</gitflow-maven-plugin.version>
+        <github-release-maven-plugin.version>1.0.3</github-release-maven-plugin.version>
 
         <!-- Dependency Analyzer -->
         <!-- Fail if dependencies have not been declared explicitly -->
@@ -402,21 +409,6 @@
                         <skipNexusStagingDeployMojo>${skipDeploy}</skipNexusStagingDeployMojo>
                     </configuration>
                 </plugin>
-                <!-- Perform Release (deprecated) -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>${maven.release-plugin.version}</version>
-                    <configuration>
-                        <mavenExecutorId>forked-path</mavenExecutorId>
-                        <autoVersionSubmodules>true</autoVersionSubmodules>
-                        <useReleaseProfile>true</useReleaseProfile>
-                        <releaseProfiles>release</releaseProfiles>
-                        <prepareGoals>deploy</prepareGoals>
-                        <goals>deploy</goals>
-                        <tagNameFormat>v@{project.version}</tagNameFormat>
-                    </configuration>
-                </plugin>
                 <plugin>
                     <groupId>com.amashchenko.maven.plugin</groupId>
                     <artifactId>gitflow-maven-plugin</artifactId>
@@ -427,8 +419,23 @@
                         <postReleaseGoals>deploy</postReleaseGoals>
                         <skipTestProject>true</skipTestProject>
                         <gitFlowConfig>
+                            <productionBranch>${github.main-branch}</productionBranch>
+                            <developmentBranch>${github.dev-branch}</developmentBranch>
                             <versionTagPrefix>v</versionTagPrefix>
                         </gitFlowConfig>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.ragedunicorn.tools.maven</groupId>
+                    <artifactId>github-release-maven-plugin</artifactId>
+                    <version>${github-release-maven-plugin.version}</version>
+                    <configuration>
+                        <owner>${github.user}</owner>
+                        <repository>${github.name}</repository>
+                        <authToken>${github.release-token}</authToken>
+                        <tagName>v${project.version}</tagName>
+                        <name>${project.version}</name>
+                        <targetCommitish>${github.main-branch}</targetCommitish>
                     </configuration>
                 </plugin>
 
@@ -533,7 +540,7 @@
                         <groupId>com.amashchenko.maven.plugin</groupId>
                         <artifactId>gitflow-maven-plugin</artifactId>
                         <configuration>
-                            <pushRemote>true</pushRemote>                                                                      
+                            <pushRemote>true</pushRemote>
                             <fetchRemote>true</fetchRemote>
                             <postReleaseGoals>deploy</postReleaseGoals>
                             <skipTestProject>true</skipTestProject>
