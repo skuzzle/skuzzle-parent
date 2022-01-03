@@ -58,6 +58,7 @@
         <!-- Dependency Analyzer -->
         <!-- Fail if dependencies have not been declared explicitly -->
         <failOnWarning>true</failOnWarning>
+        <ignoreNonCompile>true</ignoreNonCompile>
 
         <!-- Nexus Deploy -->
         <skipDeploy>false</skipDeploy>
@@ -326,10 +327,6 @@
                             <goals>
                                 <goal>analyze-only</goal>
                             </goals>
-                            <configuration>
-                                <ignoreNonCompile>true</ignoreNonCompile>
-                                <failOnWarning>true</failOnWarning>
-                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
