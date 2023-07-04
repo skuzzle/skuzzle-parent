@@ -7,7 +7,7 @@
 
     <groupId>de.skuzzle</groupId>
     <artifactId>skuzzle-parent</artifactId>
-    <version>3.0.5-SNAPSHOT</version>
+    <version>3.0.5</version>
     <packaging>pom</packaging>
 
     <name>skuzzle-parent</name>
