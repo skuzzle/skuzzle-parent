@@ -7,7 +7,7 @@
 
     <groupId>de.skuzzle</groupId>
     <artifactId>skuzzle-parent</artifactId>
-    <version>3.0.5</version>
+    <version>3.0.6</version>
     <packaging>pom</packaging>
 
     <name>skuzzle-parent</name>
@@ -157,7 +157,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.9.1</version>
+                    <version>3.12.1</version>
                     <configuration>
                         <skip>${maven.site.skip}</skip>
                         <skipDeploy>true</skipDeploy>
@@ -445,7 +445,7 @@
                 <!-- package release files -->
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>2.4</version>
+                    <version>3.6.0</version>
                     <configuration>
                         <ignoreMissingDescriptor>true</ignoreMissingDescriptor>
                         <appendAssemblyId>false</appendAssemblyId>
