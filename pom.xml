@@ -64,14 +64,6 @@
 
         <!-- Site Deploy -->
         <maven.site.skip>true</maven.site.skip>
-
-        <!-- Sonar Qube -->
-        <sonar.language>java</sonar.language>
-        <sonar.skipPackageDesign>true</sonar.skipPackageDesign>
-        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-
-        <sonar.jacoco.reportPath>${project.build.directory}/jacoco.exec</sonar.jacoco.reportPath>
-        <sonar.jacoco.itReportPath>${project.build.directory}/jacoco-it.exec</sonar.jacoco.itReportPath>
     </properties>
 
     <licenses>
@@ -186,6 +178,9 @@
                             <goals>
                                 <goal>prepare-agent</goal>
                             </goals>
+                            <configuration>
+                                <destFile>${project.build.directory}/jacoco-ut.exec</destFile>
+                            </configuration>
                         </execution>
                         <execution>
                             <id>prepare-code-coverage-integration-tests</id>
@@ -193,9 +188,16 @@
                                 <goal>prepare-agent-integration</goal>
                             </goals>
                             <configuration>
-                                <append>true</append>
                                 <skip>${skipIT}</skip>
-                                <destFile>${sonar.jacoco.itReportPath}</destFile>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>merge-coverage</id>
+                            <goals>
+                                <goal>merge</goal>
+                            </goals>
+                            <configuration>
+                                <fileSets>**/*.exec</fileSets>
                             </configuration>
                         </execution>
                     </executions>
@@ -321,26 +323,6 @@
                                 <goal>integration-test</goal>
                                 <goal>verify</goal>
                             </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-
-                <!-- Add Integration Test source folder -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>${maven.build-helper-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>add-it-sources</id>
-                            <goals>
-                                <goal>add-test-source</goal>
-                            </goals>
-                            <configuration>
-                                <sources>
-                                    <source>${project.basedir}/src/it/java</source>
-                                </sources>
-                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
