@@ -1,13 +1,12 @@
-
 <!-- Parent Pom for all skuzzle GitHub Projects -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.skuzzle</groupId>
     <artifactId>skuzzle-parent</artifactId>
-    <version>3.0.6</version>
+    <version>4.0.0-rc1</version>
     <packaging>pom</packaging>
 
     <name>skuzzle-parent</name>
@@ -31,7 +30,6 @@
 
         <!-- Tests -->
         <skipIT>false</skipIT>
-        <skipMT>true</skipMT>
 
         <!-- Java Version -->
         <java.version>11</java.version>
@@ -51,7 +49,6 @@
         <maven.build-helper-plugin.version>3.4.0</maven.build-helper-plugin.version>
         <coveralls.plugin.version>4.3.0</coveralls.plugin.version>
         <jacoco-plugin.version>0.8.10</jacoco-plugin.version>
-        <pitest-plugin.version>1.14.2</pitest-plugin.version>
         <nexus-staging-plugin.version>1.6.13</nexus-staging-plugin.version>
         <gitflow-maven-plugin.version>1.20.0</gitflow-maven-plugin.version>
         <github-release-maven-plugin.version>1.0.6</github-release-maven-plugin.version>
@@ -66,14 +63,6 @@
 
         <!-- Site Deploy -->
         <maven.site.skip>true</maven.site.skip>
-
-        <!-- Sonar Qube -->
-        <sonar.language>java</sonar.language>
-        <sonar.skipPackageDesign>true</sonar.skipPackageDesign>
-        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-
-        <sonar.jacoco.reportPath>${project.build.directory}/jacoco.exec</sonar.jacoco.reportPath>
-        <sonar.jacoco.itReportPath>${project.build.directory}/jacoco-it.exec</sonar.jacoco.itReportPath>
     </properties>
 
     <licenses>
@@ -188,6 +177,10 @@
                             <goals>
                                 <goal>prepare-agent</goal>
                             </goals>
+                            <configuration>
+                                <append>false</append>
+                                <destFile>${project.build.directory}/jacoco-ut.exec</destFile>
+                            </configuration>
                         </execution>
                         <execution>
                             <id>prepare-code-coverage-integration-tests</id>
@@ -195,37 +188,27 @@
                                 <goal>prepare-agent-integration</goal>
                             </goals>
                             <configuration>
-                                <append>true</append>
+                                <append>false</append>
                                 <skip>${skipIT}</skip>
-                                <destFile>${sonar.jacoco.itReportPath}</destFile>
                             </configuration>
                         </execution>
-                    </executions>
-                </plugin>
-                <!-- Mutation testing -->
-                <plugin>
-                    <groupId>org.pitest</groupId>
-                    <artifactId>pitest-maven</artifactId>
-                    <version>${pitest-plugin.version}</version>
-                    <configuration>
-                        <skip>${skipMT}</skip>
-                        <targetClasses>
-                            <param>de.skuzzle.*</param>
-                        </targetClasses>
-                        <targetTests>
-                            <param>de.skuzzle.*</param>
-                        </targetTests>
-                        <outputFormats>
-                            <outputFormat>XML</outputFormat>
-                        </outputFormats>
-                    </configuration>
-                    <executions>
                         <execution>
-                            <id>mutation-tests</id>
-                            <phase>verify</phase>
+                            <id>merge-coverage</id>
+                            <phase>post-integration-test</phase>
                             <goals>
-                                <goal>mutationCoverage</goal>
+                                <goal>merge</goal>
                             </goals>
+                            <configuration>
+                                <fileSets>
+                                    <fileSet>
+                                        <directory>${project.build.directory}</directory>
+                                        <includes>
+                                            <include>jacoco-ut.exec</include>
+                                            <include>jacoco-it.exec</include>
+                                        </includes>
+                                    </fileSet>
+                                </fileSets>
+                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
@@ -264,7 +247,7 @@
                                 <defaultAuthor>Simon Taddiken</defaultAuthor>
                                 <defaultVersion>${project.version}</defaultVersion>
                                 <excludes>**/*Test.java,**/*IT.java</excludes>
-                                <fixTags />
+                                <fixTags/>
                             </configuration>
                         </execution>
                         <execution>
@@ -354,26 +337,6 @@
                     </executions>
                 </plugin>
 
-                <!-- Add Integration Test source folder -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>${maven.build-helper-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>add-it-sources</id>
-                            <goals>
-                                <goal>add-test-source</goal>
-                            </goals>
-                            <configuration>
-                                <sources>
-                                    <source>${project.basedir}/src/it/java</source>
-                                </sources>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-
                 <!-- Signing artifacts -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -453,39 +416,6 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-
-        <plugins>
-            <!-- Compiler activated for all -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-            <!-- Dependency analysis activated for all modules -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-            </plugin>
-            <!-- Coverage activated for all modules -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-            </plugin>
-            <!-- Enable integration tests -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-            </plugin>
-            <!-- Mutation tests for all -->
-            <plugin>
-                <groupId>org.pitest</groupId>
-                <artifactId>pitest-maven</artifactId>
-            </plugin>
-            <!-- integration test source folders for all -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
     </build>
 
     <reporting>
