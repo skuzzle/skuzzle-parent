@@ -45,7 +45,7 @@
         <maven.javadoc-plugin.version>3.6.0</maven.javadoc-plugin.version>
         <maven.source-plugin.version>3.3.0</maven.source-plugin.version>
         <maven.jar-plugin.version>3.3.0</maven.jar-plugin.version>
-        <maven.dependency-plugin.version>3.6.0</maven.dependency-plugin.version>
+        <maven.dependency-plugin.version>3.6.1</maven.dependency-plugin.version>
         <maven.build-helper-plugin.version>3.4.0</maven.build-helper-plugin.version>
         <coveralls.plugin.version>4.3.0</coveralls.plugin.version>
         <jacoco-plugin.version>0.8.10</jacoco-plugin.version>
