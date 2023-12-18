@@ -51,7 +51,7 @@
         <jacoco-plugin.version>0.8.10</jacoco-plugin.version>
         <nexus-staging-plugin.version>1.6.13</nexus-staging-plugin.version>
         <gitflow-maven-plugin.version>1.20.0</gitflow-maven-plugin.version>
-        <github-release-maven-plugin.version>1.0.6</github-release-maven-plugin.version>
+        <github-release-maven-plugin.version>1.0.7</github-release-maven-plugin.version>
 
         <!-- Dependency Analyzer -->
         <!-- Fail if dependencies have not been declared explicitly -->
