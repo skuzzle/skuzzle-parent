@@ -6,7 +6,7 @@
 
     <groupId>de.skuzzle</groupId>
     <artifactId>skuzzle-parent</artifactId>
-    <version>4.0.0-rc1</version>
+    <version>4.0.0-rc2</version>
     <packaging>pom</packaging>
 
     <name>skuzzle-parent</name>
@@ -39,19 +39,19 @@
 
         <!-- Versions -->
         <maven.compiler.version>3.11.0</maven.compiler.version>
-        <maven.surefire.version>3.1.2</maven.surefire.version>
-        <maven.failsafe.version>3.1.2</maven.failsafe.version>
+        <maven.surefire.version>3.2.3</maven.surefire.version>
+        <maven.failsafe.version>3.2.3</maven.failsafe.version>
         <maven.gpg-plugin.version>3.1.0</maven.gpg-plugin.version>
-        <maven.javadoc-plugin.version>3.5.0</maven.javadoc-plugin.version>
+        <maven.javadoc-plugin.version>3.6.3</maven.javadoc-plugin.version>
         <maven.source-plugin.version>3.3.0</maven.source-plugin.version>
         <maven.jar-plugin.version>3.3.0</maven.jar-plugin.version>
-        <maven.dependency-plugin.version>3.6.0</maven.dependency-plugin.version>
+        <maven.dependency-plugin.version>3.6.1</maven.dependency-plugin.version>
         <maven.build-helper-plugin.version>3.4.0</maven.build-helper-plugin.version>
         <coveralls.plugin.version>4.3.0</coveralls.plugin.version>
         <jacoco-plugin.version>0.8.10</jacoco-plugin.version>
         <nexus-staging-plugin.version>1.6.13</nexus-staging-plugin.version>
         <gitflow-maven-plugin.version>1.20.0</gitflow-maven-plugin.version>
-        <github-release-maven-plugin.version>1.0.6</github-release-maven-plugin.version>
+        <github-release-maven-plugin.version>1.0.7</github-release-maven-plugin.version>
 
         <!-- Dependency Analyzer -->
         <!-- Fail if dependencies have not been declared explicitly -->
