@@ -50,7 +50,7 @@
         <coveralls.plugin.version>4.3.0</coveralls.plugin.version>
         <jacoco-plugin.version>0.8.10</jacoco-plugin.version>
         <nexus-staging-plugin.version>1.6.13</nexus-staging-plugin.version>
-        <gitflow-maven-plugin.version>1.20.0</gitflow-maven-plugin.version>
+        <gitflow-maven-plugin.version>1.21.0</gitflow-maven-plugin.version>
         <github-release-maven-plugin.version>1.0.7</github-release-maven-plugin.version>
 
         <!-- Dependency Analyzer -->
