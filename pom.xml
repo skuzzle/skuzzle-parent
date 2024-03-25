@@ -48,7 +48,7 @@
         <maven.dependency-plugin.version>3.6.1</maven.dependency-plugin.version>
         <maven.build-helper-plugin.version>3.4.0</maven.build-helper-plugin.version>
         <coveralls.plugin.version>4.3.0</coveralls.plugin.version>
-        <jacoco-plugin.version>0.8.10</jacoco-plugin.version>
+        <jacoco-plugin.version>0.8.11</jacoco-plugin.version>
         <nexus-staging-plugin.version>1.6.13</nexus-staging-plugin.version>
         <gitflow-maven-plugin.version>1.20.0</gitflow-maven-plugin.version>
         <github-release-maven-plugin.version>1.0.7</github-release-maven-plugin.version>
